@@ -2,8 +2,6 @@ const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 const allowedCors = [
     'https://study.mesto.nomoredomains.rocks',
     'http://study.mesto.nomoredomains.rocks',
-    'https://api.study.mesto.nomoredomains.rocks',
-    'http://api.study.mesto.nomoredomains.rocks',
     'localhost:3000'
   ];
   
@@ -12,6 +10,8 @@ const allowedCors = [
     const requestHeaders = req.headers['access-control-request-headers'];
     const { origin } = req.headers;
   
+    console.log(`CORS origin: ${origin}`);
+
     if (allowedCors.includes(origin)) {
       res.header('Access-Control-Allow-Origin', origin);
       res.header('Access-Control-Allow-Credentials', 'true');

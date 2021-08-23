@@ -9,7 +9,8 @@ class Api {
     getUserInfo() {
         const url = `${this._baseUrl}/users/me`
         return fetch(url, {
-                headers: this._headers
+                headers: this._headers,
+                credentials: 'include',
             })
             .then(this._getResponseData);
 
@@ -23,7 +24,7 @@ class Api {
         return fetch(url, {
                 method: 'PATCH',
                 headers: this._headers,
-
+                credentials: 'include',
                 body: JSON.stringify({
                     name: name,
                     about: about
@@ -39,7 +40,7 @@ class Api {
         return fetch(url, {
                 method: 'PATCH',
                 headers: this._headers,
-
+                credentials: 'include',
                 body: JSON.stringify({
                     avatar: link.avatar,
                 })
@@ -53,7 +54,8 @@ class Api {
     getInitialCards() {
         const url = `${this._baseUrl}/cards`
         return fetch(url, {
-                headers: this._headers
+                headers: this._headers,
+                credentials: 'include',
             })
             .then(this._getResponseData);
 
@@ -67,6 +69,7 @@ class Api {
         return fetch(url, {
                 method: 'POST',
                 headers: this._headers,
+                credentials: 'include',
                 body: JSON.stringify({
                     name: name,
                     link: link
@@ -80,6 +83,7 @@ class Api {
         return fetch(url, {
                 method: 'DELETE',
                 headers: this._headers,
+                credentials: 'include',
             })
             .then(res => {
                 if (res.ok) {
@@ -102,6 +106,7 @@ class Api {
         return fetch(url, {
                 method: 'PUT',
                 headers: this._headers,
+                credentials: 'include',
             })
             .then(this._getResponseData);
     }
@@ -111,6 +116,7 @@ class Api {
         return fetch(url, {
                 method: 'DELETE',
                 headers: this._headers,
+                credentials: 'include',
             })
             .then(this._getResponseData);
     }
