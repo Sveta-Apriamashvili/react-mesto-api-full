@@ -1,9 +1,12 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const NotFoundError = require('../utils/not-found-error');
 const ForbiddenError = require('../utils/forbidden-error');
 const UnauthorizedClientError = require('../utils/unauthorized-client-error');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -77,7 +80,11 @@ const login = (req, res, next) => {
         if (!isValid) throw new ForbiddenError('Неправильный пароль');
 
         if (isValid) {
-          const token = jwt.sign({ _id: user._id }, 'secretno04en', { expiresIn: '7d' });
+          const token = jwt.sign(
+            { _id: user._id },
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', 
+            { expiresIn: '7d' }
+          );
           res.cookie('jwt', token, {
             httpOnly: true,
             sameSite: true,
