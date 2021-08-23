@@ -108,12 +108,13 @@ function App() {
     function onLogin(email, password) {
         auth.login(email, password)
             .then(() => {
-                setIsLoggedIn(true);
-                history.push('/');
+                onTokenCheck()
+                // setIsLoggedIn(true);
+                // history.push('/');
 
             })
             .catch(() => console.log('error'))
-        updateUserEmail()
+        // updateUserEmail()
     }
 
     function onRegister(email, password) {
@@ -126,12 +127,12 @@ function App() {
             .then(() => setIsTooltipOpen(true));
     }
 
-    function updateUserEmail() {
-        let token = localStorage.getItem('jwt')
-        auth.checkToken(token)
-            .then((res) => setUserEmail(res.data.email))
-            .catch((err) => console.log(err))
-    }
+    // function updateUserEmail() {
+    //     let token = localStorage.getItem('jwt')
+    //     auth.checkToken(token)
+    //         .then((res) => setUserEmail(res.data.email))
+    //         .catch((err) => console.log(err))
+    // }
 
     function handleSignOut() {
         localStorage.removeItem('jwt');
@@ -156,13 +157,13 @@ function App() {
 
     )
 
-    function onTokenCheck(token) {
+    function onTokenCheck() {
 
-        auth.checkToken(token)
+        auth.checkToken()
             .then(res => {
-                console.log(res.data)
-                setIsLoggedIn(res.data != null)
-                setUserEmail(res.data.email)
+                console.log(res)
+                setIsLoggedIn(res != null)
+                setUserEmail(res.email)
                 history.push('/')
             })
             .catch(() => console.log('error'))

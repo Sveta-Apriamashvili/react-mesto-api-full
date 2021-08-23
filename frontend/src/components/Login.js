@@ -9,13 +9,13 @@ function Login(props) {
     password: ""
   });
 
-  useEffect(() => {
-    console.log('done')
-    const token = localStorage.getItem('jwt')
-    if (token === null) { return }
+//   useEffect(() => {
+//     // console.log('done')
+//     const token = localStorage.getItem('jwt')
+//     if (token === null) { return }
 
-    props.onTokenCheck(token)
-});
+//     props.onTokenCheck()
+// });
 
   const history = useHistory();
 
