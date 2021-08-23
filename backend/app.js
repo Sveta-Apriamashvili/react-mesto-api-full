@@ -17,6 +17,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const errorsHandler = require('./middlewares/error');
 
 app.use(cookieParser());
@@ -26,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
+app.use(cors);
 app.use(express.json());
 app.use(requestLogger);
 app.post('/signup', celebrate({
