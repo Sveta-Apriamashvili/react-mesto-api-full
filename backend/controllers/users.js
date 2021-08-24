@@ -98,20 +98,13 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res, next) => {
-  const token = jwt.sign(
-    'jwt.token.revoked',
-    'not-secret',
-    { expiresIn: '1s' }
-  );
-
-  res.cookie('jwt', token, {
+  res.cookie('jwt', 'jwt.token.revoked', {
     httpOnly: true,
     sameSite: true,
+    maxAge: -1,
   }).send({
     message: 'Сессия была успешно завершена'
   });
-
-  next();
 };
 
 module.exports = {
