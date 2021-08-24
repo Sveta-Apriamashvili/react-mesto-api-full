@@ -9,7 +9,6 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const {
   login,
-  logout,
   createUser,
   logout,
 } = require('./controllers/users');
