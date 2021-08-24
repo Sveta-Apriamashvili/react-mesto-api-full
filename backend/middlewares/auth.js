@@ -21,6 +21,7 @@ const auth = (req, res, next) => {
   }
 
   req.user = payload;
+  console.log(`User ID: ${req.params.userId}`)
 
   next();
 };
