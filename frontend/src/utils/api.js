@@ -102,7 +102,7 @@ class Api {
 
 
     addLike(id) {
-        const url = `${this._baseUrl}/cards/likes/${id}`
+        const url = `${this._baseUrl}/cards/${id}/likes`
         return fetch(url, {
                 method: 'PUT',
                 headers: this._headers,
@@ -112,7 +112,7 @@ class Api {
     }
 
     deleteLike(id) {
-        const url = `${this._baseUrl}/cards/likes/${id}`
+        const url = `${this._baseUrl}/cards/${id}/likes`
         return fetch(url, {
                 method: 'DELETE',
                 headers: this._headers,

@@ -6,6 +6,7 @@ const NOT_FOUND_MSG = 'Запрашиваемая карточка не найд
 
 const getCards = (req, res, next) => {
   Card.find({})
+    .sort({ createdAt: 'desc' })
     .then((cards) => res.send(cards))
     .catch(next);
 };

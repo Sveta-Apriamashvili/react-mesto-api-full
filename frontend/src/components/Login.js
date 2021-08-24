@@ -10,12 +10,12 @@ function Login(props) {
   });
 
 //   useEffect(() => {
-//     // console.log('done')
-//     const token = localStorage.getItem('jwt')
-//     if (token === null) { return }
+// //     // console.log('done')
+// //     const token = localStorage.getItem('jwt')
+// //     if (token === null) { return }
 
 //     props.onTokenCheck()
-// });
+// }, [props] );
 
   const history = useHistory();
 

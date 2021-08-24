@@ -139,6 +139,19 @@ function App() {
         setIsLoggedIn(false)
     }
 
+    const onTokenCheck = React.useCallback(() =>  {
+
+        auth.checkToken()
+            .then(res => {
+                console.log(res)
+                setIsLoggedIn(res != null)
+                setUserEmail(res.email)
+                history.push('/')
+            })
+            .catch(() => console.log('error'))
+
+    }, [history])
+
     React.useEffect(() => {
         Api.getUserInfo()
             .then(res => {
@@ -153,22 +166,11 @@ function App() {
                 setCards(res)
             })
             .catch(() => console.log('error'))
-    }, []
+    }, [])
 
-    )
-
-    function onTokenCheck() {
-
-        auth.checkToken()
-            .then(res => {
-                console.log(res)
-                setIsLoggedIn(res != null)
-                setUserEmail(res.email)
-                history.push('/')
-            })
-            .catch(() => console.log('error'))
-
-    }
+    React.useEffect(() => {      
+            onTokenCheck()
+        }, [onTokenCheck] );
 
     return (
         <div className="page__container">
