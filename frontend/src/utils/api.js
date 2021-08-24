@@ -133,7 +133,7 @@ class Api {
 export default new Api({
     baseUrl: 'http://api.study.mesto.nomoredomains.rocks',
     headers: {
-        authorization: '8e2b4449-94a0-4beb-aa9f-18ee80fa9c26',
+        // authorization: '8e2b4449-94a0-4beb-aa9f-18ee80fa9c26',
         'Content-Type': 'application/json'
     }
 });

@@ -30,12 +30,12 @@ export const login = (email, password) => {
     })
   })
   .then(_handleResponse)
-  .then((data) => {
-    if (data.token){
-      localStorage.setItem('jwt', data.token);
-      return data;
-    }
-  })
+  // .then((data) => {
+  //   if (data.token){
+  //     localStorage.setItem('jwt', data.token);
+  //     return data;
+  //   }
+  // })
 }
 
 export const checkToken = () => {
