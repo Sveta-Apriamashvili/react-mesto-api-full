@@ -9,7 +9,9 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const {
   login,
+  logout,
   createUser,
+  logout,
 } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
@@ -42,6 +44,7 @@ app.post('/signin', celebrate({
     password: Joi.string().required(),
   }).unknown(true),
 }), login);
+app.post('/signout', logout);
 app.use(auth);
 
 app.use('/', userRouter);

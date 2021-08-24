@@ -50,6 +50,14 @@ export const checkToken = () => {
   .then(_handleResponse);
 }
 
+export const signOut = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
+    credentials: 'include',
+  })
+  .then(_handleResponse);
+}
+
 function _handleResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);

@@ -97,6 +97,23 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res, next) => {
+  const token = jwt.sign(
+    'jwt.token.revoked',
+    'not-secret',
+    { expiresIn: '1s' }
+  );
+
+  res.cookie('jwt', token, {
+    httpOnly: true,
+    sameSite: true,
+  }).send({
+    message: 'Сессия была успешно завершена'
+  });
+
+  next();
+};
+
 module.exports = {
   getUsers,
   getUser,
@@ -104,4 +121,5 @@ module.exports = {
   updateUser,
   updateAvatar,
   login,
+  logout,
 };
