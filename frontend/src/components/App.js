@@ -35,8 +35,6 @@ function App() {
     const [userEmail, setUserEmail] = React.useState('')
     const history = useHistory();
 
-
-
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
     }
@@ -143,7 +141,6 @@ function App() {
 
         auth.checkToken()
             .then(res => {
-                console.log(res)
                 setIsLoggedIn(res != null)
                 setUserEmail(res.email)
                 history.push('/')
@@ -153,20 +150,15 @@ function App() {
     }, [history])
 
     React.useEffect(() => {
-        Api.getUserInfo()
-            .then(res => {
-                setCurrentUser(res)
-            })
-            .catch(() => console.log('error'))
-    }, [])
+        if (!isLoggedIn) { return }
 
-    React.useEffect(() => {
-        Api.getInitialCards()
-            .then(res => {
-                setCards(res)
+        Promise.all([Api.getUserInfo(), Api.getInitialCards()])
+            .then(([user, cards]) => {
+                setCurrentUser(user)
+                setCards(cards)
             })
             .catch(() => console.log('error'))
-    }, [])
+    }, [isLoggedIn]);
 
     React.useEffect(() => {      
             onTokenCheck()
