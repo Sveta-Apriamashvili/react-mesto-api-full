@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import * as auth from '../utils/auth.js';
-
+import { Link } from 'react-router-dom';
 
 function Register(props) {
 
@@ -10,7 +8,6 @@ function Register(props) {
     password: ""
   });
 
-  
 
   function handleChange(e) {
     const { name, value } = e.target

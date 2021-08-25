@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import * as auth from '../utils/auth.js';
+import React, { useState } from 'react';
 
 function Login(props) {
 
@@ -9,15 +7,6 @@ function Login(props) {
     password: ""
   });
 
-//   useEffect(() => {
-// //     // console.log('done')
-// //     const token = localStorage.getItem('jwt')
-// //     if (token === null) { return }
-
-//     props.onTokenCheck()
-// }, [props] );
-
-  const history = useHistory();
 
   function handleChange(e) {
     const { name, value } = e.target

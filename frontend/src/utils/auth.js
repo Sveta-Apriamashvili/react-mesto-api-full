@@ -29,13 +29,6 @@ export const login = (email, password) => {
         'password': password
     })
   })
-  .then(_handleResponse)
-  // .then((data) => {
-  //   if (data.token){
-  //     localStorage.setItem('jwt', data.token);
-  //     return data;
-  //   }
-  // })
 }
 
 export const checkToken = () => {
@@ -43,7 +36,6 @@ export const checkToken = () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${token}`,
     },
     credentials: 'include',
   })
