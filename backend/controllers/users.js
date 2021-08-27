@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const NotFoundError = require('../utils/not-found-error');
-const ForbiddenError = require('../utils/forbidden-error');
 const UnauthorizedClientError = require('../utils/unauthorized-client-error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -82,27 +81,27 @@ const login = (req, res, next) => {
 
   return User.findOne({ email }).select('+password')
     .then((user) => {
-      if (!user) throw new UnauthorizedClientError('Пользователя не существует');
+      if (!user) throw new UnauthorizedClientError('Неправильный пользователь или пароль');
 
-      bcrypt.compare(password, user.password, ((error, isValid) => {
-        if (error) throw new ForbiddenError(error);
+      bcrypt.compare(password, user.password)
+        .then((isValid) => {
+          if (!isValid) throw new UnauthorizedClientError('Неправильный логин или пароль');
 
-        if (!isValid) throw new ForbiddenError('Неправильный пароль');
-
-        if (isValid) {
-          const token = jwt.sign(
-            { _id: user._id },
-            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-            { expiresIn: '7d' },
-          );
-          res.cookie('jwt', token, {
-            httpOnly: true,
-            sameSite: true,
-          }).send({
-            name: user.name, about: user.about, avatar: user.avatar, email: user.email,
-          });
-        }
-      }));
+          if (isValid) {
+            const token = jwt.sign(
+              { _id: user._id },
+              NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+              { expiresIn: '7d' },
+            );
+            res.cookie('jwt', token, {
+              httpOnly: true,
+              sameSite: true,
+            }).send({
+              name: user.name, about: user.about, avatar: user.avatar, email: user.email,
+            });
+          }
+        })
+        .catch(next);
     })
     .catch(next);
 };
