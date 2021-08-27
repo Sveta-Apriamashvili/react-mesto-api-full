@@ -2,7 +2,7 @@
   "name": "react-mesto-api-full",
   "version": "1.0.0",
   "description": "## Директории",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
@@ -38,6 +38,7 @@
     "mongoose": "^5.13.5",
     "validator": "^13.6.0",
     "winston": "^3.0.0",
-    "express-winston": "^4.0.4"
+    "express-winston": "^4.0.4",
+    "dotenv": "^10.0.0"
   }
 }

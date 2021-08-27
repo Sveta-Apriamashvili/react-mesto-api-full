@@ -13,15 +13,15 @@ const auth = (req, res, next) => {
 
   try {
     payload = jwt.verify(
-      token, 
+      token,
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-      );
+    );
   } catch (err) {
     throw new UnauthorizedClientError(UNAUTHORIZED_ERROR_MESSAGE);
   }
 
   req.user = payload;
-  console.log(`User ID: ${req.user}`)
+  console.log(`User ID: ${req.user}`);
 
   next();
 };

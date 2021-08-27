@@ -25,6 +25,16 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
+const getUserById = (req, res, next) => {
+  User.findById(req.params.userId)
+    .then((user) => {
+      if (!user) throw new NotFoundError('Пользователя не существует');
+
+      return res.send(user);
+    })
+    .catch(next);
+};
+
 const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
@@ -82,8 +92,8 @@ const login = (req, res, next) => {
         if (isValid) {
           const token = jwt.sign(
             { _id: user._id },
-             NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', 
-            { expiresIn: '7d' }
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+            { expiresIn: '7d' },
           );
           res.cookie('jwt', token, {
             httpOnly: true,
@@ -97,19 +107,21 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+// eslint-disable-next-line no-unused-vars
 const logout = (req, res, next) => {
   res.cookie('jwt', 'jwt.token.revoked', {
     httpOnly: true,
     sameSite: true,
     maxAge: -1,
   }).send({
-    message: 'Сессия была успешно завершена'
+    message: 'Сессия была успешно завершена',
   });
 };
 
 module.exports = {
   getUsers,
   getUser,
+  getUserById,
   createUser,
   updateUser,
   updateAvatar,

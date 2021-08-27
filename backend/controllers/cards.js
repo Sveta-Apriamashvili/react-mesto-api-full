@@ -26,9 +26,9 @@ const deleteCard = (req, res, next) => {
       if (!card) throw new NotFoundError('Карточки не существует');
       if (card.owner.toString() !== req.user._id.toString()) throw new ForbiddenError('Нельзя удалять карточки других пользователей');
 
-      card.delete();
-
-      return res.send(card);
+      return card.delete()
+        .then((c) => res.send(c))
+        .catch(next);
     })
     .catch(next);
 };

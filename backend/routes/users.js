@@ -13,16 +13,18 @@ const method = (value) => {
 const {
   getUsers,
   getUser,
+  getUserById,
   updateUser,
   updateAvatar,
 } = require('../controllers/users');
 
 router.get('/users', getUsers);
 router.get('/users/me', getUser);
+router.get('/users/:userId', getUserById);
 router.patch('/users/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required,
+    about: Joi.string().min(2).max(30).required,
   }).unknown(true),
 }), updateUser);
 router.patch('/users/me/avatar', celebrate({
