@@ -1,6 +1,7 @@
 # react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. 
+Photo-sharing app, where users can create an account and share their pictures
+- Authorisation and authentication, 
+- Editing the profile,
+- Add/remove/like a card,
 
-* [Ссылка на проект](http://study.mesto.nomoredomains.rocks/)
-* Домен сервера для проверки: http://api.study.mesto.nomoredomains.rocks/
-* IP: 178.154.225.186
+* [Click here to visit the website](http://study.mesto.nomoredomains.rocks/)
